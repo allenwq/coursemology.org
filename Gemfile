@@ -17,6 +17,8 @@ group :production do
   gem 'puma', "~> 2.6.0"
   gem 'dalli'
   gem 'connection_pool'
+  gem "newrelic_rpm"
+  gem 'rollbar'
 end
 
 group :development, :test do
@@ -94,12 +96,10 @@ gem 'amoeba', :github => 'raymondtangsc/amoeba'
 gem "haml"
 gem "axlsx"
 gem "nokogiri"
-gem "newrelic_rpm"
 gem 'dotenv-rails'
 gem "wkhtmltopdf_binary_provider"
 gem "wicked_pdf"
 gem 'imagesLoaded_rails'
-gem 'rollbar'
 gem 'simple_enum', '~> 1.6.9'
 
 # To use ActiveModel has_secure_password
