@@ -3,9 +3,6 @@ source 'https://rails-assets.org'
 
 gem 'rails', '3.2.22'
 
-# Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git'
-
 group :development do
   gem 'pry-rails'
   gem 'meta_request'
@@ -14,7 +11,7 @@ group :development do
 end
 
 group :production do
-  gem 'puma', "~> 2.14.0"
+  gem 'puma', "~> 2.15.0"
   gem 'dalli'
   gem 'connection_pool'
   gem "newrelic_rpm"
@@ -30,7 +27,6 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'coveralls', require: false
-  gem 'test-unit'
 end
 
 # Gems used only for assets and not required
@@ -53,9 +49,8 @@ group :assets do
   gem 'rails-assets-fabric'
 end
 
-#gem 'pg'
 gem 'mysql2'
-gem 'uglifier', '>= 1.0.3'
+gem 'uglifier', '>= 2.7.2'
 gem 'jquery-rails', '2.1.3'
 gem 'jqtree-rails'
 gem 'jquery-tmpl-rails'
@@ -90,7 +85,7 @@ gem 'angularjs-rails'
 gem 'angular-ui-sortable-rails'
 gem 'jquery-validation-rails'
 gem "cocoon"
-gem 'simple_form', :github => 'plataformatec/simple_form', :branch => "v2.2"
+gem 'simple_form'#, :github => 'plataformatec/simple_form', :branch => "v2.2"
 gem 'acts_as_relation', :github => 'raymondtangsc/acts_as_relation', :branch => 'V1.0.2'
 gem 'amoeba', :github => 'raymondtangsc/amoeba'
 gem "haml"
@@ -101,18 +96,7 @@ gem "wkhtmltopdf_binary_provider"
 gem "wicked_pdf"
 gem 'imagesLoaded_rails'
 gem 'simple_enum', '~> 1.6.9'
-
-# To use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.0.0'
-
-# To use Jbuilder templates for JSON
-# gem 'jbuilder'
-
-# Use unicorn as the app server
-# gem 'unicorn'
-
-#Deploy with Capistrano
-gem 'capistrano'
+gem 'test-unit'
 
 # To use debugger
 # gem 'debugger'

@@ -631,6 +631,13 @@ if PreferableItem.count == 66
                          default_display:  true
 end
 
+PreferableItem.find_or_create_by! item:             "Assessment",
+                                  item_type:        "StartAt",
+                                  name:             "IgnoreStartAt",
+                                  default_value:    "",
+                                  description:      "Allow students to attempt the assessments that start at a future time provided they have fulfilled the prerequisites",
+                                  default_display:  false
+
 if NavbarLinkType.count == 0
   NavbarLinkType.create! link_type: 'module'
   NavbarLinkType.create! link_type: 'admin'
@@ -757,20 +764,22 @@ if NavbarPreferableItem.count == 13
                                pos: 14
 end
 
-if ProgrammingLanguage.count == 0
-  ProgrammingLanguage.create!({name: "Python",
-                              codemirror_mode: "python",
-                              version:  "3.3",
-                              cmd: "python3.3"}, :without_protection => true)
+ProgrammingLanguage.find_or_create_by!(name: "Python",
+                                       codemirror_mode: "python",
+                                       version:  "3.3",
+                                       cmd: "python3.3")
 
+ProgrammingLanguage.find_or_create_by!(name: "Python",
+                                       codemirror_mode: "python",
+                                       version:  "3.4",
+                                       cmd: "python3.4")
 
-end
+ProgrammingLanguage.find_or_create_by!(name: "Python",
+                                       codemirror_mode: "python",
+                                       version:  "2.7",
+                                       cmd: "python2.7")
 
-if ProgrammingLanguage.count == 1
-  ProgrammingLanguage.create!({name: "Python",
-                               codemirror_mode: "python",
-                               version:  "3.4",
-                               cmd: "python3.4"}, :without_protection => true)
-
-
-end
+ProgrammingLanguage.find_or_create_by!(name: "Python",
+                                       codemirror_mode: "python",
+                                       version:  "3.5",
+                                       cmd: "python3.5")

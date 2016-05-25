@@ -169,6 +169,15 @@ class DuplicateController < ApplicationController
     Assessment.set_callback(:save, :after, :update_closing_tasks)
     Assessment.set_callback(:save, :after, :create_or_destroy_tasks)
 
+    shift_dates(clone.lesson_plan_milestones + clone.lesson_plan_entries, options[:course_diff], [:start_at, :end_at])
+    shift_dates(clone.assessments, options[:course_diff], [:open_at, :close_at, :bonus_cutoff_at])
+    shift_dates(clone.surveys, options[:course_diff], [:open_at, :expire_at])
+    shift_dates(clone.material_folders, options[:course_diff])
+
+    clone.assessments.each do |assessment|
+      assessment.create_or_destroy_tasks
+    end
+
     respond_to do |format|
       flash[:notice] = "The course '#{@course.title}' has been duplicated."
       format.html { redirect_to course_preferences_path(clone) }
@@ -251,6 +260,16 @@ class DuplicateController < ApplicationController
       end
       tt.taggable = l.dest_obj
       tt.save
+    end
+  end
+
+  def shift_dates(time_records, date_shift, date_columns = [:open_at, :close_at])
+    return if !date_shift || date_shift == 0
+
+    Array(time_records).each do |record|
+      Array(date_columns).each do |column|
+        record.update_column(column, record.send(column) + date_shift) if record.send(column)
+      end
     end
   end
 end
