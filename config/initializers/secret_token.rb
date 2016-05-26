@@ -5,4 +5,8 @@
 # Make sure the secret is at least 30 characters and all random,
 # no regular words or you'll be exposed to dictionary attacks.
 Coursemology::Application.config.secret_token =
-  '6fbd8a07baf488302988b9af969eb7f21aca1ca4e98cde64b8cd447e9fc7540574d9491c92184ff564029d85e55964cf1692932765383aa80e48d8451f96fe8cb4cb67b5625a919a'
+    if Rails.env.development? or Rails.env.test?
+      '6646d49dfcbde9fd877fe9317c14d417a6d433e36b1694441029109af312b3dde6356f47b8b422389cabb8e9e65ac1c75ea8ebfa60b46b8708ff9945fa3f58e7'
+    else
+      ENV['APP_SECRET']
+    end
