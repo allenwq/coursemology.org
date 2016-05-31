@@ -79,8 +79,10 @@ class FileUpload < ActiveRecord::Base
   def file_url
     if copy_url
       copy_url
+    elsif s3_file?
+      s3_url(file.url)
     else
-      file.url
+      url_with_name_option(file.url)
     end
   end
 
@@ -100,18 +102,14 @@ class FileUpload < ActiveRecord::Base
 
   # Sets the download filename of S3 if specified; otherwise removes the filename.
   def save_s3_filename(filename)
-    unless self.file then
-      return
-    end
+    return unless self.file
 
-    if self.copy_url
-      return
-    end
+    return unless s3_file?
+
+    return if self.copy_url
 
     obj = file.s3_object
-    unless obj then
-      return
-    end
+    return unless obj
 
     # Preserve the ACL of the file we are replacing
     acl = obj.acl
@@ -126,4 +124,19 @@ class FileUpload < ActiveRecord::Base
     new_obj.acl = acl
   end
 
+  MIGRATION_TIME = DateTime.new(2016, 5, 31)
+  def s3_file?
+    created_at && created_at < MIGRATION_TIME
+  end
+
+  S3_HOST = 'http://coursemology.s3.amazonaws.com'
+  def s3_url(url)
+    current_host = Paperclip::Attachment.default_options[:qiniu_host]
+    url.sub(current_host, S3_HOST)
+  end
+
+  # Specify the name of the file user downloaded
+  def url_with_name_option(url)
+    url + "?attname=#{original_name}"
+  end
 end

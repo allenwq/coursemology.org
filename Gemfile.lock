@@ -264,6 +264,9 @@ GEM
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
+    paperclip-qiniu (0.1.0)
+      paperclip
+      qiniu-rs (~> 3.0)
     polyglot (0.3.5)
     power_assert (0.2.2)
     pry (0.10.0)
@@ -278,6 +281,11 @@ GEM
     pry-rails (0.3.2)
       pry (>= 0.9.10)
     puma (2.15.3)
+    qiniu-rs (3.4.10)
+      json (~> 1.7)
+      mime-types (~> 1.19)
+      rest-client (~> 1.6)
+      ruby-hmac (~> 0.4)
     rack (1.4.7)
     rack-cache (1.6.1)
       rack (>= 0.4)
@@ -339,6 +347,7 @@ GEM
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
     rspec-support (3.0.3)
+    ruby-hmac (0.4.0)
     rubyzip (0.9.9)
     sanitize (3.0.0)
       crass (~> 0.2.0)
@@ -470,6 +479,7 @@ DEPENDENCIES
   omniauth
   omniauth-facebook
   paperclip (~> 3.0)
+  paperclip-qiniu
   pry-rails
   puma (~> 2.15.0)
   rails (~> 3.2.22.2)
