@@ -70,7 +70,7 @@ Coursemology::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   # Config mailer
-  config.action_mailer.default_url_options = { :host => 'coursemology.com' }
+  config.action_mailer.default_url_options = { :host => 'coursemology.cn' }
   # ActionMailer Config
   # Setup for production - deliveries, no errors raised
   config.action_mailer.delivery_method = :smtp
@@ -79,12 +79,13 @@ Coursemology::Application.configure do
   config.action_mailer.default :charset => "utf-8"
 
   ActionMailer::Base.smtp_settings = {
-      :address => "smtp.mandrillapp.com",
+      :address => "smtp.sparkpostmail.com",
       :port => 587,
-      :authentication => :plain,
-      :domain => ENV['MANDRILL_SMTP_USER'],
-      :user_name => ENV['MANDRILL_SMTP_USER'],
-      :password => ENV['MANDRILL_SMTP_PASSWORD'],
+      :authentication => :login,
+      :domain => "coursemology.cn",
+      :user_name => ENV['SPARKPOST_SMTP_USER'],
+      :password => ENV['SPARKPOST_SMTP_PASSWORD'],
+      :enable_starttls_auto => true
   }
 
   config.paperclip_defaults = {
